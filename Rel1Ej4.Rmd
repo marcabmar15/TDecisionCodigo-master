@@ -1,0 +1,55 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+-   Estados de la naturaleza:
+
+    -   e1="Da a luz antes de un año"
+
+    -   e2= "Da a luz después de un año"
+
+-   Tabla de valoraciones:
+
+    -   Alternativa d1:
+
+        -   $x_{1,1}$ `r 30*12+(600+3000)/2`
+
+        -   $x_{1,1}$ `r 30*12`
+
+    -   Alternativa d1:
+
+        -   $x_{2,1}$ `r 60*12`
+
+        -   $x_{2,2}$ `r 60*12`
+
+    -   Alternativa d1:
+
+        -   $x_{3,1}$ `r 40*12+3000`
+
+        -   $x_{3,2}$ `r 40*12`
+
+**Introducción de datos:**
+
+```{r}
+tb04 = crea.tablaX(c(2100, 360, 
+                     720, 720, 
+                     3480, 480), numalternativas = 3, numestados = 2)
+tb04
+```
+
+**Solución del problema:**
+
+```{r}
+sol04 = criterio.Todos(tb04, alfa = 0.6, favorable = FALSE)
+sol04
+
+```
+
+La mejor alternativa es **d2= Seguro Curadita**.
+
+Añadimos el gráfico del método de Hurwitz:
+
+```{r}
+dibuja.criterio.Hurwicz(tb04, favorable = T)
+```
