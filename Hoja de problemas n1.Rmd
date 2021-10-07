@@ -1,0 +1,140 @@
+---
+title: "Hoja de problemas n1"
+author: "María Luisa Cabrera Marín"
+date: "30/9/2021"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+#knitr::opts_chunk$set(echo = TRUE, results = "hide", eval = F)
+knitr::opts_chunk$set(echo = TRUE)
+source("teoriadecision_funciones_incertidumbre.R")
+```
+
+# Ejercicio 1. 
+Aplicar los criterios de decisión bajo incertidumbre a los problemas cuya matriz de valores numéricos vienen dadas en las tablas siguientes:
+
+```{r}
+a = matrix(c(5,4,6,2,3,1,-1,8,7,5,2,0),nrow=4,ncol=3,byrow=TRUE)
+b = matrix(c(2, 12, -3, 5, 5, -1, 0, 10, -2), nrow = 3, ncol = 3, byrow = T)
+
+
+A <- crea.tablaX(a, numalternativas = 4, numestados = 3)
+B <- crea.tablaX(b, numalternativas = 3, numestados = 3)
+```
+
+
+Criterio Wald
+```{r}
+criterio.Wald(A, favorable = T)
+criterio.Wald(B, favorable = T)
+criterio.Wald(A, favorable = F)
+criterio.Wald(B, favorable = F)
+```
+
+
+Criterio Optimista
+```{r}
+criterio.Optimista(A, favorable = T)
+criterio.Optimista(B, favorable = T)
+criterio.Optimista(A, favorable = F)
+criterio.Optimista(B, favorable = F)
+```
+
+
+Criterio Hurwitz
+```{r}
+criterio.Hurwicz(A, favorable = T, alfa = 1)
+criterio.Hurwicz(B, favorable = T, alfa = 1)
+criterio.Hurwicz(A, favorable = F, alfa = 1)
+criterio.Hurwicz(B, favorable = F, alfa = 1)
+
+criterio.Hurwicz.General(A, favorable = T, alfa = 1)
+criterio.Hurwicz.General(B, favorable = T, alfa = 1)
+criterio.Hurwicz.General(A, favorable = F, alfa = 1)
+criterio.Hurwicz.General(B, favorable = F, alfa = 1)
+
+dibuja.criterio.Hurwicz(A, favorable = T)
+dibuja.criterio.Hurwicz(B, favorable = T)
+dibuja.criterio.Hurwicz(A, favorable = F)
+dibuja.criterio.Hurwicz(B, favorable = F)
+```
+
+
+Criterio Savage
+```{r}
+criterio.Savage(A, favorable = T)
+criterio.Savage(B, favorable = T)
+criterio.Savage(A, favorable = F)
+criterio.Savage(B, favorable = F)
+```
+
+
+Criterio Laplace
+```{r}
+criterio.Laplace(A, favorable = T)
+criterio.Laplace(B, favorable = T)
+criterio.Laplace(A, favorable = F)
+criterio.Laplace(B, favorable = F)
+```
+
+
+Criterio Punto Ideal
+```{r}
+criterio.PuntoIdeal(A, favorable = T)
+criterio.PuntoIdeal(B, favorable = T)
+criterio.PuntoIdeal(A, favorable = F)
+criterio.PuntoIdeal(B, favorable = F)
+```
+
+
+Todos los criterios
+```{r}
+criterio.Todos(A, alfa = 1, favorable = T)
+criterio.Todos(B, alfa = 1, favorable = T)
+criterio.Todos(A, alfa = 1, favorable = F)
+criterio.Todos(B, alfa = 1, favorable = F)
+```
+
+
+
+
+# Ejercicio 2.
+Aplicar el criterio de Hurwicz al problema de decisión bajo incertidumbre dado por la matriz
+de utilidades (valor numérico que representa beneficio):
+
+```{r}
+a <- c(0,1,0,1,0,0,0.5,0.5,0)
+A <- crea.tablaX(a, numalternativas = 3, numestados = 3)
+
+```
+
+
+Criterio Hurwitz
+```{r}
+criterio.Hurwicz(A, favorable = T, alfa = 1)
+
+criterio.Hurwicz.General(A, favorable = T, alfa = 1)
+
+dibuja.criterio.Hurwicz(A, favorable = T)
+```
+
+
+# Ejercicio 3
+Un fabricante de coches estudia lanzar un nuevo modelo al mercado, pudiéndolo posicionar en
+cuatro segmentos distintos. Los segmentos candidatos son: deportivo bajo coste, berlina familiar
+media, monovolumen y todo terreno. Los beneficios esperados (expresados en millones de euros)
+en el año siguiente al lanzamiento en función del tipo de interés al consumo son:
+
+¿Cuál sería la opción que usted le recomendaría a la empresa?
+
+```{r}
+A <- crea.tablaX(c(24,19,10,16,22,22,23,20,23,23,21,15,25,24,18,14), numalternativas = 4, numestados = 4) 
+A
+
+criterio.Todos(A,0.5,favorable = FALSE)
+```
+
+
